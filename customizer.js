@@ -8,19 +8,25 @@
 
 (function($) {
 	$.fn.customizer = function(options) {
+		
+		var objs = this;
 
-		// Getting Type 
-		var type = this.get(0).tagName.toLowerCase();
-			
+		this.each(function(i) {
+			// Getting Type 
+			var type = objs.get(i).tagName.toLowerCase();
+
+			alert(type);
 			//Type Control
 			switch(type){
 				case 'select':
-				generateSelectBox(this , options);
+				generateSelectBox(objs.eq(i) , options);
 				break;
 				
 				default:
 				
 			}
+			
+		});
 	}
 			
 	
@@ -66,9 +72,10 @@
 			
 				//display none and generate div container
 				obj.css('display','none').addClass('cd_cutomized');
+				var uniqselector = Math.floor(Math.random()*9999);	
 
-								
-				var htmlOutput = '<div style="position: relative;"><div class="'+options.containerClass+' closed">';
+
+				var htmlOutput = '<div style="position: relative;"><div class="'+options.containerClass+' closed '+uniqselector+'">';
 				
 
 				
@@ -87,10 +94,9 @@
 
 				var lengthOfOptions = obj.find('option').length;
 				var itemHeight = $.trim(findStyle('.'+options.liClass, 'height').replace('px', ''));
-					
 				
 				
-				$('.'+options.containerClass).css(options.css.cd_customizer_select_box).bind("click", function(event){
+				$('.'+options.containerClass+'.'+uniqselector).css(options.css.cd_customizer_select_box).bind("click", function(event){
 					
 					if(!$(this).hasClass('opened'))
 					$(this).stop(true,true).animate({ height : (lengthOfOptions * itemHeight) +'px' }).addClass('opened').removeClass('closed');
@@ -100,10 +106,10 @@
 						
 				});
 				
-				$(document).bind('click', function(e){clickOut(e,options);});
+				$(document).bind('click', function(e){clickOut(e,options,uniqselector);});
 
 				
-								$('.'+options.liClass).css(options.css.cd_customizer_select_item).on("click", function(event){
+				$('.'+options.liClass).css(options.css.cd_customizer_select_item).on("click", function(event){
 					
 					if(!$(this).hasClass(options.selectedClass)){
 						var data = {
@@ -114,16 +120,17 @@
 
 						$(this).remove();
 						$('.'+options.liClass).removeClass(options.selectedClass);
-						$('.'+options.containerClass).prepend('<span class="'+options.liClass+' '+options.selectedClass+'" data-id="'+data.id+'" data-val="'+data.value+'">'+data.text+'</span>');
+						$('.'+options.containerClass+'.'+uniqselector).prepend('<span class="'+options.liClass+' '+options.selectedClass+'" data-id="'+data.id+'" data-val="'+data.value+'">'+data.text+'</span>');
+						
 						obj.find('option:selected').removeAttr('selected');
 						$('.'+options.liClass).css(options.css.cd_customizer_select_item);
-						console.log(obj.find('option[value="'+data.value+'"]').attr("selected","selected"));
+						obj.find('option[value="'+data.value+'"]').attr("selected","selected");
 					}
 					
 				});
 
 				
-				$('.'+options.containerClass).children(":first").addClass(options.selectedClass);
+				$('.'+options.containerClass+'.'+uniqselector).children(":first").addClass(options.selectedClass);
 				
 
 
@@ -156,14 +163,14 @@
 				
 		}
 		
-		function clickOut(e,options) {
+		function clickOut(e,options,uniqselector) {
 			var target = e.target;
-			var currentListElements = $('.'+options.containerClass).parent().find('*').andSelf();
-			if(jQuery.inArray(target, currentListElements)<0 && $('.'+options.containerClass).hasClass('opened')) {
-				$('.'+options.containerClass).click();
+			var currentListElements = $('.'+options.containerClass+'.'+uniqselector).parent().find('*').andSelf();
+			if(jQuery.inArray(target, currentListElements)<0 && $('.'+options.containerClass+'.'+uniqselector).hasClass('opened')) {
+				$('.'+options.containerClass+'.'+uniqselector).click();
 			}
 			return false;
 		}
-	
+
 
 })(jQuery);
