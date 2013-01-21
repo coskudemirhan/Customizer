@@ -1,1 +1,1 @@
-<a href="projectxstudio.com/customizer/">live demo</a>
+<a href="http://projectxstudio.com/customizer/">live demo</a>
