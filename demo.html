@@ -5,8 +5,91 @@
 <title>Form Customizer</title>
 <script src="jquery-1.9.0.js" type="text/javascript" charset="utf-8"></script>
 <script src="customizer.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(document).ready(function(){
+
+	$('.selectbox').customizer({
+		containerClass: 'first_example_box', 
+		liClass: 'first_example_item', 
+		selectedClass: 'first_example_selected'
+	});
+
+});
+
+</script>
+<style type="text/css">
+.first_example_box {
+	color:rgba(0,0,0,0.7);
+	width: 250px;
+	height: 25px;
+	border: 1px solid #E6E6E6;
+	background-image: url(http://s7.postimage.org/3wq940okn/arrow.png);
+	background-position: 230px 10px;
+	background-repeat: no-repeat;
+	
+}
+.first_example_box.opened {
+	background-image: url(http://s14.postimage.org/hh2go2ch9/arrow_bw.png) !important;
+	-webkit-box-shadow: 0px 0px 10px rgba(50, 50, 50, 0.2);
+	-moz-box-shadow: 0px 0px 10px rgba(50, 50, 50, 0.2);
+	box-shadow: 0px 0px 10px rgba(50, 50, 50, 0.2);
+	transition: box-shadow 0.6s;
+	-moz-transition: -moz-box-shadow 0.6s;
+	-webkit-transition: -webkit-box-shadow 0.6s; 
+	-o-transition: box-shadow 0.6s; 
+}
+
+.first_example_box.closed {
+	-webkit-box-shadow: 0px 0px 2px rgba(50, 50, 50, 0.1);
+	-moz-box-shadow: 0px 0px 2px rgba(50, 50, 50, 0.1);
+	box-shadow: 0px 0px 2px rgba(50, 50, 50, 0.1);
+	transition: box-shadow 0.4s;
+	-moz-transition: -moz-box-shadow 0.4s;
+	-webkit-transition: -webkit-box-shadow 0.4s; 
+	-o-transition: box-shadow 0.4s; 
+}
+
+.first_example_selected{
+	background-color: rgba(0,0,0,0.04) !important;
+	border-top-style: none !important;
+
+}
+.first_example_item {
+	width: 250px;
+	height: 25px;
+	padding-top: 3px;
+	padding-left: 6px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-top-color: #E6E6E6;
+	background-color: rgba(0,0,0,0.02);
+
+}
+
+.first_example_item:hover {
+	color:rgba(0,0,0,0.8);
+	background-color: rgba(0,0,0,0.06);
+	transition: background-color 0.6s;
+	-moz-transition: background-color 0.6s;
+	-webkit-transition: background-color 0.6s; 
+	-o-transition: background-color 0.6s; 
+}
+
+</style>
 </head>
 
 <body>
+
+<select class="selectbox">
+<option value="option1">Easy</option>
+<option value="option2">Very Easy</option>
+<option value="option3">Easy peasy</option>
+<option value="option4">Easiest easy</option>
+<option value="option5">Custom Selectbox with jQuery</option>
+<option value="option6">Force Of Elasticity Css and jQuery</option>
+</select>
+<br/>
+<br/>
+<div class="arrow"></div>
 </body>
 </html>
